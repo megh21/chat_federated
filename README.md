@@ -15,7 +15,7 @@ The RAG model is used as the underlying architecture, which combines retrieval-b
 - Cohere API: [Briefly describe Cohere API here]
 - Sentence Transformers: [Briefly describe Sentence Transformers here]
 - Hugging Face: [Briefly describe Hugging Face here]
-
+THe demo is Live at [koyeb](https://chatfederated-megh.koyeb.app/)
 ## Features
 - RAG model: The RAG model is used to generate responses by combining retrieval-based and generation-based techniques.
 - Dataset: The chatbot is trained on a dataset of conversational data specific to the thesis topic.
