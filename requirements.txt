@@ -6,3 +6,4 @@ python-dotenv
 pypdf
 faiss-cpu
 langchainhub
+cohere
