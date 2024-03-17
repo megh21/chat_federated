@@ -1,0 +1,8 @@
+openai
+langchain
+streamlit
+langchain-openai
+python-dotenv
+pypdf
+faiss-cpu
+langchainhub
