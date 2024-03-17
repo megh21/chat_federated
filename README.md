@@ -10,7 +10,7 @@ The RAG model is used as the underlying architecture, which combines retrieval-b
 
 ## Technologies Used
 
-- FIASS: [Briefly describe FIASS here]
+- FAISS: [Briefly describe FIASS here]
 - Langchain: [Briefly describe Langchain here]
 - Cohere API: [Briefly describe Cohere API here]
 - Sentence Transformers: [Briefly describe Sentence Transformers here]
