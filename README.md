@@ -16,7 +16,7 @@ The RAG model is used as the underlying architecture, which combines retrieval-b
 - Sentence Transformers: [Briefly describe Sentence Transformers here]
 - Hugging Face: [Briefly describe Hugging Face here]
 
-
+yes you!,you describe it there! it's not written by chatgpt hihi!
 **The demo is Live at [koyeb](https://chatfederated-megh.koyeb.app/)**
 
 
