@@ -10,13 +10,13 @@ The RAG model is used as the underlying architecture, which combines retrieval-b
 
 ## Technologies Used
 
-- FAISS: [Briefly describe FIASS here]
-- Langchain: [Briefly describe Langchain here]
-- Cohere API: [Briefly describe Cohere API here]
-- Sentence Transformers: [Briefly describe Sentence Transformers here]
-- Hugging Face: [Briefly describe Hugging Face here]
+- FAISS 
+- Langchain
+- Cohere API
+- Sentence Transformers
+- Hugging Face
 
-yes you!,you describe it there! it's not written by chatgpt hihi!
+
 **The demo is Live at [koyeb](https://chatfederated-megh.koyeb.app/)**
 
 
@@ -88,4 +88,4 @@ This project is licensed under the [MIT License](LICENSE).
 - [Hugging Face](https://huggingface.co/) for providing the RAG model implementation.
 - koyeb free tier hosting for demo.
 - cohere trial API key for demo.
-- [Your Supervisor's Name] for guidance and support throughout the thesis.
+- My supervisor for guidance and support throughout the thesis.
