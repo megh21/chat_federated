@@ -18,7 +18,7 @@ The RAG model is used as the underlying architecture, which combines retrieval-b
 
 
 **The demo is Live at [koyeb](https://chatfederated-megh.koyeb.app/)**
-
+(hopefully the link is working, can't guaranteeit will still work. if it does not work, please try running cloning & running offline 
 
 ## Features
 - RAG model: The RAG model is used to generate responses by combining retrieval-based and generation-based techniques.
