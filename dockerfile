@@ -5,12 +5,16 @@ COPY src /src
 
 WORKDIR /src
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.in requirements.in
+RUN pip install -r requirements.in
 COPY databases databases
+COPY .env .env
+COPY .streamlit .streamlit
+EXPOSE 8501
 
-EXPOSE 8000
+ENV PYTHONUNBUFFERED=1
+ENV STREAMLIT_ENV=production
 
-
-
-CMD ["streamlit", "run", "src/app.py", "--server.port=8000", "--server.address=0.0.0.0"]
+# Command to run Streamlit
+# CMD ["streamlit", "run", "src/app.py"]
+CMD ["tail", "-f", "/dev/null"]
