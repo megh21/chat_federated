@@ -315,3 +315,4 @@ watchdog==6.0.0
     # via streamlit
 yarl==1.17.1
     # via aiohttp
+pypdf
