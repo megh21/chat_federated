@@ -1,184 +1,3 @@
-# import streamlit as st
-# from langchain_community.document_loaders import PyPDFLoader
-# from langchain_community.vectorstores import FAISS
-# from langchain_cohere import CohereEmbeddings
-# import os
-# from dotenv import load_dotenv
-# import time
-# load_dotenv()
-
-# cohere_api_key = os.getenv("COHERE_API_KEY")
-# if not cohere_api_key:
-#     st.error("Cohere API Key not found! Please set the 'COHERE_API_KEY' environment variable.")
-#     st.stop()
-
-# # Function to handle file uploads and process them
-# def handle_file_upload():
-#     uploaded_files = st.file_uploader("Upload PDFs", type="pdf", accept_multiple_files=True)
-#     if st.button("process"):
-#         if uploaded_files:
-#             with st.spinner("Processing files..."):
-#                 # Collect all documents from the uploaded PDFs
-#                 all_documents = []
-                
-#                 # Process each uploaded file
-#                 for uploaded_file in uploaded_files:
-#                     with open(uploaded_file.name, "wb") as f:
-#                         f.write(uploaded_file.getbuffer())
-                    
-#                     # Extract documents from the uploaded PDF
-#                     documents = convert_pdf_to_documents(uploaded_file.name)
-#                     all_documents.extend(documents)
-                
-#                 # Create a single vector store from all documents
-#                 create_vector_store(all_documents)
-#                 st.success(f"All files combined into a single vector store successfully!")
-
-# # Convert a single PDF to documents (text extraction)
-# def convert_pdf_to_documents(file_name):
-#     loader = PyPDFLoader(file_name)
-#     documents = loader.load()
-#     return documents
-
-# # Function to create a vector store from a list of documents
-# def create_vector_store(documents):
-#     # Using Cohere embeddings for text processing
-#     embedding = CohereEmbeddings(
-#         model="embed-english-light-v3.0",
-#         cohere_api_key=cohere_api_key,
-#         user_agent="my_app/1.0"  # Specify user_agent manually
-#     )
-    
-#     # Create a FAISS vector store from the documents
-#     vector_store = FAISS.from_documents(documents, embedding)
-    
-#     # Ensure the 'databases' directory exists
-#     if not os.path.exists("databases"):
-#         os.makedirs("databases")
-    
-#     # Take user input for the name of the vector store
-#     vector_store_name = st.text_input("Enter the name of the vector store")
-    
-#     # Remove any special characters from the name
-#     vector_store_name = "".join(e for e in vector_store_name if e.isalnum())
-    
-#     # If name is not provided, use the default name with the timestamp
-#     if not vector_store_name:
-#         vector_store_name = "vectorstore({:.0f})".format(time.time())
-    
-#     # Button to finish and save the database
-#     if vector_store_name:
-#         if st.button("Finish and Save Database"):
-#             # Save the vector store to the 'databases' folder
-#             vector_store.save_local(folder_path="databases/" + vector_store_name)
-#             st.success("Vector store created and saved successfully!")
-
-# # Main function to run the app
-# def main():
-#     st.title("Create New Database with PDFs")
-    
-#     # Call the function to handle PDF uploads
-#     handle_file_upload()
-
-# if __name__ == "__main__":
-#     main()
-
-## ***********The second try of the code**********
-
-
-
-# import streamlit as st
-# from langchain_community.document_loaders import PyPDFLoader
-# from langchain_community.vectorstores import FAISS
-# from langchain_cohere import CohereEmbeddings
-# import os
-# from dotenv import load_dotenv
-# import time
-# load_dotenv()
-
-# cohere_api_key = os.getenv("COHERE_API_KEY")
-# if not cohere_api_key:
-#     st.error("Cohere API Key not found! Please set the 'COHERE_API_KEY' environment variable.")
-#     st.stop()
-
-# # Function to handle file uploads and process them
-# def handle_file_upload():
-#     uploaded_files = st.file_uploader("Upload PDFs", type="pdf", accept_multiple_files=True)
-#     if st.button("Process Files", key="process_files_button"):
-#         if uploaded_files:
-#             with st.spinner("Processing files..."):
-#                 # Collect all documents from the uploaded PDFs
-#                 all_documents = []
-                
-#                 # Process each uploaded file
-#                 for uploaded_file in uploaded_files:
-#                     with open(uploaded_file.name, "wb") as f:
-#                         f.write(uploaded_file.getbuffer())
-                    
-#                     # Extract documents from the uploaded PDF
-#                     documents = convert_pdf_to_documents(uploaded_file.name)
-#                     all_documents.extend(documents)
-                
-#                 # Create a single vector store from all documents
-#                 create_vector_store(all_documents)
-
-# # Convert a single PDF to documents (text extraction)
-# def convert_pdf_to_documents(file_name):
-#     loader = PyPDFLoader(file_name)
-#     documents = loader.load()
-#     return documents
-
-# # Function to create a vector store from a list of documents
-# def create_vector_store(documents):
-#     # Using Cohere embeddings for text processing
-#     embedding = CohereEmbeddings(
-#         model="embed-english-light-v3.0",
-#         cohere_api_key=cohere_api_key,
-#         user_agent="my_app/1.0"  # Specify user_agent manually
-#     )
-    
-#     # Create a FAISS vector store from the documents
-#     vector_store = FAISS.from_documents(documents, embedding)
-    
-#     # Ensure the 'databases' directory exists
-#     if not os.path.exists("databases"):
-#         os.makedirs("databases")
-    
-#     def save_database_callback():
-#         if vector_store_name:
-#             # Save the vector store to the 'databases' folder
-#             vector_store.save_local(folder_path="databases/" + vector_store_name)
-#             st.success("Vector store created and saved successfully!")
-#         else:
-#             st.error("Please provide a name for the vector store.")
-
-#     # Take user input for the name of the vector store
-#     vector_store_name = st.text_input("Enter the name of the vector store", key="vector_store_name_input")
-    
-#     # Remove any special characters from the name
-#     vector_store_name = "".join(e for e in vector_store_name if e.isalnum())
-    
-#     # If name is empty, use the default name with the timestamp
-#     if not vector_store_name:
-#         print("No name provided, using default name.")
-#         vector_store_name = "vectorstore({:.0f})".format(time.time())
-
-#     # Button to finish and save the database
-#     if vector_store_name:
-#        if st.button("Finish and Save Database", key="finish_save_database_button"):
-#           save_database_callback()
-        
-
-# # Main function to run the app
-# def main():
-#     st.title("Create New Database with PDFs")
-    
-#     # Call the function to handle PDF uploads
-#     handle_file_upload()
-
-# if __name__ == "__main__":
-#     main()
-
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
@@ -186,6 +5,7 @@ from langchain_cohere import CohereEmbeddings
 import os
 from pathlib import Path
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import re
 
 class PDFProcessor:
     def __init__(self):
@@ -210,10 +30,76 @@ class PDFProcessor:
             user_agent="my_app/1.0"
         )
 
+        if 'chunk_size' not in st.session_state:
+            st.session_state.chunk_size = 1000
+        if 'chunk_overlap' not in st.session_state:
+            st.session_state.chunk_overlap = 200
+            
+        self.text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=1000,
+            chunk_overlap=200,
+            length_function=len,
+            add_start_index=True,
+        )
+
+    def _clean_text(self, text):
+        """Clean the extracted text"""
+        # Remove headers, footers, and page numbers
+        text = re.sub(r'\n\s*\d+\s*\n', '\n', text)
+        # Remove special characters and non-ASCII content
+        text = re.sub(r'[^\x00-\x7F]+', ' ', text)
+        # Remove multiple spaces
+        text = re.sub(r'\s+', ' ', text)
+        # Remove multiple newlines
+        text = re.sub(r'\n+', '\n', text)
+        # Remove URLs
+        # text = re.sub(r'http\S+|www.\S+', '', text)
+        # Remove email addresses
+        text = re.sub(r'\S+@\S+', '', text)
+
+        # Remove references (e.g., [1], [2,3], [4-6])
+        text = re.sub(r'\[\d+(,\s*\d+)*(-\d+)?\]', '', text)
+        
+        # Remove equations (e.g., (1), (2), (3))
+        text = re.sub(r'\(\d+\)', '', text)
+               
+        # Remove figure and table captions (e.g., Figure 1:, Table 1:)
+        text = re.sub(r'(Figure|Table) \d+:', '', text)
+        
+        return text.strip()
+
     def process_pdfs(self):
         """Main function to handle PDF upload and processing"""
         st.title("PDF to Vector Database Converter")
         
+        # Add chunk size and overlap controls
+        col1, col2 = st.columns(2)
+        with col1:
+            st.session_state.chunk_size = st.number_input(
+                "Chunk Size", 
+                min_value=100, 
+                max_value=2000, 
+                value=st.session_state.chunk_size,
+                help="Number of characters per chunk"
+            )
+        with col2:
+            st.session_state.chunk_overlap = st.number_input(
+                "Chunk Overlap", 
+                min_value=0, 
+                max_value=500, 
+                value=st.session_state.chunk_overlap,
+                help="Number of characters to overlap between chunks"
+            )
+
+        # Update text splitter with new values
+        self.text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=st.session_state.chunk_size,
+            chunk_overlap=st.session_state.chunk_overlap,
+            length_function=len,
+            add_start_index=True,
+        )
+
+
         # File uploader
         uploaded_files = st.file_uploader(
             "Upload PDFs", 
@@ -248,45 +134,62 @@ class PDFProcessor:
         documents = []
         with st.spinner("Processing PDFs..."):
             for file in uploaded_files:
-                # Save uploaded file temporarily
                 temp_path = Path(file.name)
                 temp_path.write_bytes(file.getvalue())
                 
                 try:
-                    # Load and process PDF
+                    # Load PDF
                     loader = PyPDFLoader(str(temp_path))
-                    current_docs = loader.load()
-                    documents.extend(current_docs)
+                    docs = loader.load()
+                    
+                    # Clean and process each page
+                    for doc in docs:
+                        doc.page_content = self._clean_text(doc.page_content)
+                    
+                    # Split documents into chunks
+                    chunked_docs = self.text_splitter.split_documents(docs)
+                    
+                    # Add source metadata
+                    for doc in chunked_docs:
+                        doc.metadata['source_file'] = file.name
+                        if 'page' not in doc.metadata:
+                            doc.metadata['page'] = 'unknown'
+                    
+                    documents.extend(chunked_docs)
                     if file.name not in st.session_state.processed_files:
                         st.session_state.processed_files.append(file.name)
                     st.success(f"Successfully processed: {file.name}")
+                    
+                    # Display processing stats
+                    st.info(f"""
+                    Processing stats for {file.name}:
+                    - Original pages: {len(docs)}
+                    - Chunks created: {len(chunked_docs)}
+                    - Average chunk size: {sum(len(d.page_content) for d in chunked_docs) // len(chunked_docs)} characters
+                    """)
+                    
                 except Exception as e:
                     st.error(f"Error processing {file.name}: {str(e)}")
                 finally:
-                    # Cleanup temporary file
-                    temp_path.unlink(missing_ok=True)
+                    # temp_path.unlink(missing_ok=True)
+                    pass
                     
         return documents
+    
 
     def _handle_vector_store_creation(self):
         """Handle vector store creation and saving"""
-        st.write("Creating vector store...")
+        db_name = st.text_input("Enter database name", key="db_name_input")
         
-        # Get database name
-        db_name = st.text_input(
-            "Enter database name:",
-            key="db_name",
-            help="Enter a name for your vector database"
-        )
-        
-        # Save button
         if db_name and st.button("Save Database", key="save_button"):
             try:
                 with st.spinner("Creating vector store..."):
-                    # Create vector store
+                    # Create vector store with metadata filtering
                     vector_store = FAISS.from_documents(
-                        st.session_state.documents, 
-                        self.embeddings
+                        st.session_state.documents,
+                        self.embeddings,
+                        
+                        # metadata={"source_file": "str", "page": "str"}
                     )
                     
                     # Clean database name and save
@@ -297,12 +200,18 @@ class PDFProcessor:
                     vector_store.save_local(str(save_path))
                     st.session_state.vector_store = vector_store
                     
-                    # Success message
+                    # Add processing stats to success message
+                    total_chunks = len(st.session_state.documents)
+                    avg_chunk_size = sum(len(d.page_content) for d in st.session_state.documents) // total_chunks
+                    
                     st.success(f"""
                     Database saved successfully!
                     - Name: {db_name}
                     - Location: {save_path}
                     - Files processed: {len(st.session_state.processed_files)}
+                    - Total chunks: {total_chunks}
+                    - Average chunk size: {avg_chunk_size} characters
+                    - Chunk overlap: {st.session_state.chunk_overlap} characters
                     """)
                     
                     # Reset state
