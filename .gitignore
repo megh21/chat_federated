@@ -5,3 +5,4 @@ dataset/*
 /.streamlit/*
 #ignore all pdf files
 *.pdf
+*.db
