@@ -1,6 +1,7 @@
 .env
 __pycache__
 /databases/*
-/data/*
 dataset/*
 /.streamlit/*
+#ignore all pdf files
+*.pdf
