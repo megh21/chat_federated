@@ -188,6 +188,7 @@ class PDFProcessor:
                     vector_store = FAISS.from_documents(
                         st.session_state.documents,
                         self.embeddings,
+                        dimensions=2048  # Set dimensions to 2048 for Cohere embeddings
                         
                         # metadata={"source_file": "str", "page": "str"}
                     )
