@@ -11,7 +11,7 @@ from langchain_core.messages import trim_messages
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.prompts import ChatPromptTemplate
 from datetime import datetime
-
+import os
 
 class ChatInterface:
     def __init__(self):
@@ -26,12 +26,12 @@ class ChatInterface:
         # Initialize Cohere components
         self.embeddings = CohereEmbeddings(
             model="embed-english-light-v3.0",
-            cohere_api_key=st.secrets["COHERE_API_KEY"]
+            cohere_api_key=st.secrets["COHERE_API_KEY"] or os.environ.get("COHERE_API_KEY")
         )
         self.chat_model = ChatCohere(
             model="command-r",
             temperature=0.3,  # Lower temperature for more focused responses
-            cohere_api_key=st.secrets["COHERE_API_KEY"],
+            cohere_api_key=st.secrets["COHERE_API_KEY"] or os.environ.get("COHERE_API_KEY"),
             timeout_seconds=60  # Increase timeout for longer responses
 
         )
@@ -343,7 +343,7 @@ class ChatInterface:
 
 def main():
     # Check for API key
-    if "COHERE_API_KEY" not in st.secrets:
+    if "COHERE_API_KEY" not in st.secrets or os.environ.get("COHERE_API_KEY") is None:
         st.error("Please set the Cohere API key in your Streamlit secrets")
         st.stop()
     
