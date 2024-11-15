@@ -2,6 +2,7 @@ import streamlit as st
 from pathlib import Path
 from pdf_processing import PDFProcessor
 from chat import ChatInterface
+import os
 
 class PDFChatApp:
     def __init__(self):
@@ -76,7 +77,7 @@ class PDFChatApp:
 
 def main():
     # Check for API key
-    if "COHERE_API_KEY" not in st.secrets:
+    if "COHERE_API_KEY" not in st.secrets or os.environ.get("COHERE_API_KEY") is None:
         st.error("Please set the Cohere API key in your Streamlit secrets")
         st.stop()
     
