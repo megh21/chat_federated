@@ -48,10 +48,10 @@ class PDFProcessor:
         text = re.sub(r'\n\s*\d+\s*\n', '\n', text)
         # Remove special characters and non-ASCII content
         text = re.sub(r'[^\x00-\x7F]+', ' ', text)
-        # Remove multiple spaces
-        text = re.sub(r'\s+', ' ', text)
+        # # Remove multiple spaces
+        # text = re.sub(r'\s+', ' ', text)
         # Remove multiple newlines
-        text = re.sub(r'\n+', '\n', text)
+        # text = re.sub(r'\n+', '\n', text)
         # Remove URLs
         # text = re.sub(r'http\S+|www.\S+', '', text)
         # Remove email addresses
