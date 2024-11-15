@@ -26,7 +26,7 @@ class PDFProcessor:
         # Initialize Cohere embeddings
         self.embeddings = CohereEmbeddings(
             model="embed-english-light-v3.0",
-            cohere_api_key=st.secrets["COHERE_API_KEY"] or os.getenv("COHERE_API_KEY"),
+            cohere_api_key= os.getenv("COHERE_API_KEY"),
             user_agent="my_app/1.0"
         )
 
@@ -224,7 +224,7 @@ class PDFProcessor:
 
 def main():
     # Check for API key
-    if "COHERE_API_KEY" not in st.secrets or os.environ.get("COHERE_API_KEY") is None:
+    if os.getenv("COHERE_API_KEY") is None:
         st.error("Please set the Cohere API key in your Streamlit secrets")
         st.stop()
     
