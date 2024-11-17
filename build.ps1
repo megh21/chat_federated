@@ -2,8 +2,8 @@
 $imageName = "mbnextsolutions/chatresnextsol"
 $tag = "latest"
 
-# Navigate to the project directory
-Set-Location "D:\project\chat_federated"
+# Navigate to the project directory which is current directory
+Set-Location $PSScriptRoot
 
 # Build the Docker image
 docker build -t ${imageName}:${tag} .

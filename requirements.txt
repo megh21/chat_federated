@@ -316,3 +316,4 @@ watchdog==6.0.0
 yarl==1.17.1
     # via aiohttp
 pypdf
+schedule

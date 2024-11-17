@@ -6,3 +6,4 @@ dataset/*
 #ignore all pdf files
 *.pdf
 *.db
+/sessions/*
