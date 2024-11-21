@@ -7,3 +7,4 @@ dataset/*
 *.pdf
 *.db
 /sessions/*
+/.secrets/*

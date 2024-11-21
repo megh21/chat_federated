@@ -3,6 +3,9 @@ from pathlib import Path
 from pdf_processing import PDFProcessor
 from chat import ChatInterface
 import os
+import dotenv
+dotenv.load_dotenv()
+# from azure_setup import setup_azure_blob_storage
 
 class PDFChatApp:
     def __init__(self):
@@ -77,10 +80,11 @@ class PDFChatApp:
 
 def main():
     # Check for API key
-    if  os.getenv("COHERE_API_KEY") is None:
-        st.error("Please set the Cohere API key in your Streamlit secrets")
+    if  os.getenv("OPENAI_API_KEY") is None:
+        st.error("Please set the OPENAI API KEY in your Streamlit secrets")
         st.stop()
-    
+        # Download folders from Azure Blob Storage
+    # setup_azure_blob_storage()
     # Initialize and run application
     app = PDFChatApp()
     app.run()

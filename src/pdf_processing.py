@@ -1,7 +1,7 @@
 import streamlit as st
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
-from langchain_cohere import CohereEmbeddings
+from langchain_openai import OpenAIEmbeddings
 import os
 from pathlib import Path
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -23,11 +23,10 @@ class PDFProcessor:
         self.db_dir = Path("databases")
         self.db_dir.mkdir(exist_ok=True)
         
-        # Initialize Cohere embeddings
-        self.embeddings = CohereEmbeddings(
-            model="embed-english-light-v3.0",
-            cohere_api_key= os.getenv("COHERE_API_KEY"),
-            user_agent="my_app/1.0"
+        # Initialize OpenAI embeddings
+        self.embeddings = OpenAIEmbeddings(
+            model="text-embedding-ada-002",
+            openai_api_key=os.getenv("OPENAI_API_KEY")
         )
 
         if 'chunk_size' not in st.session_state:
@@ -48,12 +47,6 @@ class PDFProcessor:
         text = re.sub(r'\n\s*\d+\s*\n', '\n', text)
         # Remove special characters and non-ASCII content
         text = re.sub(r'[^\x00-\x7F]+', ' ', text)
-        # # Remove multiple spaces
-        # text = re.sub(r'\s+', ' ', text)
-        # Remove multiple newlines
-        # text = re.sub(r'\n+', '\n', text)
-        # Remove URLs
-        # text = re.sub(r'http\S+|www.\S+', '', text)
         # Remove email addresses
         text = re.sub(r'\S+@\S+', '', text)
 
@@ -98,7 +91,6 @@ class PDFProcessor:
             length_function=len,
             add_start_index=True,
         )
-
 
         # File uploader
         uploaded_files = st.file_uploader(
@@ -188,9 +180,6 @@ class PDFProcessor:
                     vector_store = FAISS.from_documents(
                         st.session_state.documents,
                         self.embeddings,
-                        # dimensions=2048  # Set dimensions to 2048 for Cohere embeddings
-                        
-                        # metadata={"source_file": "str", "page": "str"}
                     )
                     
                     # Clean database name and save
@@ -224,8 +213,8 @@ class PDFProcessor:
 
 def main():
     # Check for API key
-    if os.getenv("COHERE_API_KEY") is None:
-        st.error("Please set the Cohere API key in your Streamlit secrets")
+    if os.getenv("OPENAI_API_KEY") is None:
+        st.error("Please set the OpenAI API key in your Streamlit secrets")
         st.stop()
     
     # Initialize and run processor
